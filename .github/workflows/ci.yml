@@ -33,9 +33,13 @@ jobs:
       - name: Run unit and integration tests
         run: pnpm test
 
+      - name: Build application
+        run: pnpm run build
+
       - name: Run E2E tests
         uses: cypress-io/github-action@v6
         with:
-          start: pnpm run dev
-          wait-on: 'http://localhost:5173'
+          start: pnpm run preview
+          wait-on: 'http://localhost:4173'
+          wait-on-timeout: 120
           browser: chrome
