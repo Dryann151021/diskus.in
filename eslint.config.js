@@ -7,7 +7,7 @@ import daStyle from 'eslint-config-dicodingacademy';
 
 export default defineConfig([
   daStyle,
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'cypress']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
