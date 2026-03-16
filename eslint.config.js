@@ -1,8 +1,12 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import { defineConfig, globalIgnores } from 'eslint/config';
+import pluginCypress from 'eslint-plugin-cypress';
 import daStyle from 'eslint-config-dicodingacademy';
 
 export default defineConfig([
@@ -14,6 +18,7 @@ export default defineConfig([
       js.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+      pluginCypress.configs.recommended,
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -28,4 +33,5 @@ export default defineConfig([
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
+  ...storybook.configs['flat/recommended'],
 ]);
