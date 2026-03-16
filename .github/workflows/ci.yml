@@ -1,9 +1,6 @@
 name: diskus.in Countinous Integration
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
