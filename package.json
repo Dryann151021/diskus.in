@@ -45,5 +45,11 @@
     "tabWidth": 2,
     "trailingComma": "es5",
     "arrowParens": "always"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "cypress",
+      "esbuild"
+    ]
   }
 }
