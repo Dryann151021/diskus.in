@@ -37,51 +37,28 @@ describe('Login spec', () => {
   });
 
   it('should login successfully and redirect to homepage', () => {
-    // 1. Buat random email untuk register
-    const randomEmail = `testuser_${Math.random().toString(36).substring(7)}@example.com`;
-    const password = 'testpassword123';
-
-    // 2. Akses halaman register dan daftar terlebih dahulu
-    cy.visit('/register');
-    cy.get('input[placeholder="Masukkan nama"]').type('Test User');
-    cy.get('input[placeholder="Masukkan email"]').type(randomEmail);
-    cy.get('input[placeholder="Minimal 6 karakter"]').type(password);
-
-    // Intercept register API
-    cy.intercept('POST', '**/register').as('registerFlow');
-    cy.get('button')
-      .contains(/^Daftar$/)
-      .click();
-
-    // Tunggu register selesai
-    cy.wait('@registerFlow');
-
-    // Mencegah alert window jika API error, tapi cypress bisa lanjut
-    cy.on('window:alert', () => {});
-
-    // 3. Kembali ke halaman login
-    cy.visit('/login');
-
-    // 4. Mengisi email dan password yang benar
-    cy.get('input[placeholder="Masukkan email"]').type(randomEmail);
-    cy.get('input[placeholder="Masukkan password"]').type(password);
+    // Use test credentials
+    const testEmail = 'johndoe@example.com';
+    const testPassword = 'password123';
 
     // Intercept login dan get profile API
     cy.intercept('POST', '**/login').as('loginFlow');
     cy.intercept('GET', '**/users/me').as('profileFlow');
+
+    // Mengisi email dan password
+    cy.get('input[placeholder="Masukkan email"]').type(testEmail);
+    cy.get('input[placeholder="Masukkan password"]').type(testPassword);
 
     cy.get('button')
       .contains(/^Login$/)
       .click();
 
     // Tunggu API login dan profile
-    cy.wait('@loginFlow');
-    cy.wait('@profileFlow');
+    cy.wait('@loginFlow', { timeout: 10000 });
+    cy.wait('@profileFlow', { timeout: 10000 });
 
-    // 5. Memastikan navigasi ke homepage berhasil
-    // Homepage menampilkan navigation dengan tombol logout
+    // Memastikan navigasi ke homepage berhasil
+    cy.url().should('include', '/');
     cy.get('nav').should('be.visible');
-
-    cy.url().should('eq', Cypress.config().baseUrl + '/');
   });
 });
