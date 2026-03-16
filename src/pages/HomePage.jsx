@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { asyncPopulateUsersAndThreads } from '../states/shared/action.js';
 import {
   asyncToggleUpVoteThread,
@@ -9,11 +11,27 @@ import {
 import ThreadsList from '../components/ThreadsList.jsx';
 import CategoryFilter from '../components/CategoryFilter.jsx';
 
+function ThreadSkeleton() {
+  return (
+    <div className="thread-item" style={{ padding: '1rem' }}>
+      <Skeleton width={80} height={20} style={{ marginBottom: '0.5rem' }} />
+      <Skeleton width="60%" height={24} style={{ marginBottom: '0.5rem' }} />
+      <Skeleton count={2} style={{ marginBottom: '0.25rem' }} />
+      <div style={{ display: 'flex', gap: '1rem', marginTop: '0.75rem' }}>
+        <Skeleton width={50} height={20} />
+        <Skeleton width={50} height={20} />
+        <Skeleton width={80} height={20} />
+      </div>
+    </div>
+  );
+}
+
 function HomePage() {
   const dispatch = useDispatch();
   const threads = useSelector((state) => state.threads);
   const users = useSelector((state) => state.users);
   const authUser = useSelector((state) => state.authUser);
+  const isLoading = useSelector((state) => state.isLoading);
 
   const [activeCategory, setActiveCategory] = useState('');
 
@@ -64,13 +82,21 @@ function HomePage() {
       </aside>
       <main className="home-page__content">
         <h2 className="home-page__title">Diskusi Terbaru</h2>
-        <ThreadsList
-          threads={filteredThreads}
-          users={users}
-          authUserId={authUser?.id}
-          onUpVote={onUpVote}
-          onDownVote={onDownVote}
-        />
+        {isLoading && threads.length === 0 ? (
+          <div className="threads-skeleton">
+            <ThreadSkeleton />
+            <ThreadSkeleton />
+            <ThreadSkeleton />
+          </div>
+        ) : (
+          <ThreadsList
+            threads={filteredThreads}
+            users={users}
+            authUserId={authUser?.id}
+            onUpVote={onUpVote}
+            onDownVote={onDownVote}
+          />
+        )}
       </main>
     </div>
   );
