@@ -32,6 +32,9 @@ jobs:
       - name: Run Linter
         run: pnpm run lint
 
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps chromium
+
       - name: Run Tests (Unit & Integration)
         run: pnpm test
 
