@@ -33,7 +33,7 @@ jobs:
         run: pnpm run lint
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps chromium chromium-headless-shell
 
       - name: Run Tests (Unit & Integration)
         run: pnpm test

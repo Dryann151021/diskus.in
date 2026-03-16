@@ -55,4 +55,11 @@ export default defineConfig({
       },
     ],
   },
+  optimizeDeps: {
+    include: [
+      '@testing-library/jest-dom/vitest',
+      '@storybook/addon-a11y/preview',
+      '@storybook/react-vite',
+    ],
+  },
 });
