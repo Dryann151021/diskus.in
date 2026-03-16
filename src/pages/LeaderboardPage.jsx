@@ -15,7 +15,7 @@ function LeaderboardPage() {
     <div className="leaderboard-page">
       <h2 className="leaderboard-page__title">Leaderboard</h2>
       <p className="leaderboard-page__subtitle">
-        Pengguna paling aktif di diskus.in
+        Pengguna paling aktif di diskus.in <br />
       </p>
       <div className="leaderboard-page__list">
         {leaderboards.map((item, index) => (
