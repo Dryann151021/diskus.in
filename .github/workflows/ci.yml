@@ -36,9 +36,6 @@ jobs:
       - name: Run E2E tests
         uses: cypress-io/github-action@v6
         with:
-          build: pnpm run build
-          start: pnpm run preview
-          wait-on: 'http://localhost:4173'
+          start: pnpm run dev
+          wait-on: 'http://localhost:5173'
           browser: chrome
-        env:
-          CYPRESS_BASE_URL: http://localhost:4173
