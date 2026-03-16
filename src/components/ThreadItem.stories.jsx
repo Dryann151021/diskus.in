@@ -6,6 +6,7 @@ export default {
   title: 'Components/ThreadItem',
   component: ThreadItem,
   decorators: [
+    // eslint-disable-next-line no-unused-vars
     (Story) => (
       <MemoryRouter>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>

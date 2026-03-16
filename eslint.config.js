@@ -18,7 +18,7 @@ export default defineConfig([
       js.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      pluginCypress.configs.flat.recommended,
+      pluginCypress.configs.recommended,
     ],
     languageOptions: {
       ecmaVersion: 2020,

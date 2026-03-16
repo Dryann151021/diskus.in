@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+/* global __dirname */
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
