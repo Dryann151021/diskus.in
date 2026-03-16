@@ -9,8 +9,8 @@ import './assets/styles/style.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
+    <BrowserRoter>
+      <Provide store={store}>
         <App />
       </Provider>
     </BrowserRouter>
